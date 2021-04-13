@@ -2,6 +2,7 @@ package fr.cesi.contractor.Models;
 
 import lombok.Data;
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.Date;
 
 @Data
@@ -22,6 +23,23 @@ public class Project {
     private Boolean isDeleted;
     private Integer _v;
     private Date created_at;
+
+    public Project() {
+    }
+
+    public Project(Integer _id, String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite, String state, Boolean isDeleted, Integer _v, Date created_at) {
+        this._id = _id;
+        this.name = name;
+        this.customer = customer;
+        this.address = address;
+        this.postCode = postCode;
+        this.city = city;
+        this.dateBeginSite = dateBeginSite;
+        this.state = state;
+        this.isDeleted = isDeleted;
+        this._v = _v;
+        this.created_at = created_at;
+    }
 
     public Integer get_id() {
         return _id;
