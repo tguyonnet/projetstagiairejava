@@ -2,17 +2,19 @@ package fr.cesi.contractor.Controllers;
 
 import fr.cesi.contractor.Models.Quote;
 import fr.cesi.contractor.Repository.QuoteRepository;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/quote")
+@RequestMapping("/api")
 public class QuoteController {
     @Autowired
     private QuoteRepository quoteRepository;
@@ -22,7 +24,7 @@ public class QuoteController {
      *
      * @return the list
      */
-    @GetMapping("/index")
+    @GetMapping("/quotes")
     public List<Quote> getAllQuotes()
     {
         return quoteRepository.findAll();
@@ -35,7 +37,7 @@ public class QuoteController {
      * @return
      * @throws ResourceNotFoundException
      */
-    @GetMapping("/{id}")
+    @GetMapping("quote/{id}")
     public ResponseEntity<Quote> getQuoteById(@PathVariable(value = "id") Integer quoteId) throws ResourceNotFoundException
     {
         Quote quote = quoteRepository.findById(quoteId)
@@ -64,20 +66,33 @@ public class QuoteController {
      * @return
      * @throws ResourceNotFoundException
      */
-    @PutMapping("/{id}")
+    @PutMapping("/quote/{id}")
     public ResponseEntity<Quote> updateQuote(@PathVariable(value = "id") Integer quoteId, @Validated @RequestBody Quote quoteDetail) throws ResourceNotFoundException
     {
         Quote quote = quoteRepository.findById(quoteId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quote " + quoteId + " not found"));
 
-        quote.set_v(quoteDetail.get_v());
-        quote.setCreated_at(quoteDetail.getCreated_at());
-        quote.setCustomer(quoteDetail.getCustomer());
-        quote.setObject(quoteDetail.getState());
-        quote.setProject(quoteDetail.getProject());
-        quote.setState(quoteDetail.getState());
-        quote.setTotalCost(quoteDetail.getTotalCost());
-        quote.setTotalPrice(quoteDetail.getTotalPrice());
+        if (quoteDetail.get_v() != 0) {
+            quote.set_v(quoteDetail.get_v());
+        }
+        if (quoteDetail.getCustomer() != null) {
+            quote.setCustomer(quoteDetail.getCustomer());
+        }
+        if (quoteDetail.getObject() != null) {
+            quote.setObject(quoteDetail.getObject());
+        }
+        if (quoteDetail.getProject() != null) {
+            quote.setProject(quoteDetail.getProject());
+        }
+        if (quoteDetail.getState() != null) {
+            quote.setState(quoteDetail.getState());
+        }
+        if (quoteDetail.getTotalCost() != 0) {
+            quote.setTotalCost(quoteDetail.getTotalCost());
+        }
+        if (quoteDetail.getTotalPrice() != 0) {
+            quote.setTotalPrice(quoteDetail.getTotalPrice());
+        }
         quote.setUpdated_at(new Date());
 
         final Quote updatedQuote = quoteRepository.save(quote);
@@ -90,7 +105,7 @@ public class QuoteController {
      * @param quoteId
      * @return
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/quote/{id}")
     public ResponseEntity<String> deleteQuote(@PathVariable(value = "id") Integer quoteId)
     {
         Quote quote = quoteRepository.findById(quoteId)
