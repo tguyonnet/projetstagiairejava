@@ -11,28 +11,28 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/project")
+@RequestMapping("/api")
 public class ProjectController {
 
     @Autowired
     ProjectRepository projectRepository;
 
-    @GetMapping("/index")
+    @GetMapping("/projects")
     public List<Project> allProjects() {
       return projectRepository.findAll();
     }
 
-    @GetMapping("show/{id}")
+    @GetMapping("/project/show/{id}")
     public Optional<Project> getProjectById(@PathVariable(value = "id") Integer id) {
         return projectRepository.findById(id);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/project/create")
     public Project createProject(@Validated @RequestBody Project project) {
         return projectRepository.save(project);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/project/update/{id}")
     public ResponseEntity<Project> updateProject(@PathVariable(value = "id") Integer id, @Validated @RequestBody Project changeProject) throws ResourceNotFoundException
     {
         Project project = projectRepository.findById(id)
@@ -51,7 +51,7 @@ public class ProjectController {
         return ResponseEntity.ok(updateProject);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/project/delete/{id}")
     public String deleteProject(@PathVariable Integer id) {
         projectRepository.deleteById(id);
         return "Projet "+ id + " supprimé ";
