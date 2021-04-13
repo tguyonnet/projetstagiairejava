@@ -11,25 +11,30 @@ import java.util.Date;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private int _id;
     private String nom;
     private String firstName;
     private String email;
     private String phoneNumber;
     private String sexe;
+    private String address;
+    private Integer postCode;
+    private String city;
     private String typeCustomer;
     private Boolean isDeleted;
     private String _v;
     private Date created_at;
     private Date updated_at;
 
-
-    public Customer(String nom, String firstName, String email, String phoneNumber, String sexe, String typeCustomer, Boolean isDeleted, String _v, Date created_at, Date updated_at) {
+    public Customer(String nom, String firstName, String email, String phoneNumber, String sexe, String address, Integer postCode, String city, String typeCustomer, Boolean isDeleted, String _v, Date created_at, Date updated_at) {
         this.nom = nom;
         this.firstName = firstName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.sexe = sexe;
+        this.address = address;
+        this.postCode = postCode;
+        this.city = city;
         this.typeCustomer = typeCustomer;
         this.isDeleted = isDeleted;
         this._v = _v;
@@ -37,9 +42,44 @@ public class Customer {
         this.updated_at = updated_at;
     }
 
+
     public Customer() {
 
     }
+
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(Integer postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 
     public Date getCreated_at() {
         return created_at;
@@ -49,9 +89,6 @@ public class Customer {
         return updated_at;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getNom() {
         return nom;
@@ -85,9 +122,6 @@ public class Customer {
         return _v;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setNom(String nom) {
         this.nom = nom;
