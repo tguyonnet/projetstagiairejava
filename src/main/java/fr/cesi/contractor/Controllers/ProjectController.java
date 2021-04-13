@@ -7,6 +7,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,16 +38,30 @@ public class ProjectController {
     public ResponseEntity<Project> updateProject(@PathVariable(value = "id") Integer id, @Validated @RequestBody Project changeProject) throws ResourceNotFoundException
     {
         Project project = projectRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Quote " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Project " + id + " not found"));
 
-        project.setName(changeProject.getName());
-        project.setAddress(changeProject.getAddress());
-        project.setPostCode(changeProject.getPostCode());
-        project.setCity(changeProject.getCity());
-        project.setDateBeginSite(changeProject.getDateBeginSite());
-        project.setState(changeProject.getState());
-        project.setIsDeleted(changeProject.getIsDeleted());
-        project.set_v(changeProject.get_v());
+        if(changeProject.getName() !=null) {
+            project.setName(changeProject.getName());
+        }
+        if(changeProject.getAddress() !=null) {
+            project.setAddress(changeProject.getAddress());
+        }
+        if(changeProject.getPostCode() !=null) {
+            project.setPostCode(changeProject.getPostCode());
+        }
+        if(changeProject.getCity() !=null) {
+            project.setCity(changeProject.getCity());
+        }
+        if(changeProject.getDateBeginSite() !=null) {
+            project.setDateBeginSite(changeProject.getDateBeginSite());
+        }
+        if(changeProject.getState() !=null) {
+            project.setState(changeProject.getState());
+        }
+        if(changeProject.getIsDeleted() !=null) {
+            project.setIsDeleted(changeProject.getIsDeleted());
+        }
+        project.setUpdated_at(new Date());
 
         final Project updateProject = projectRepository.save(project);
         return ResponseEntity.ok(updateProject);

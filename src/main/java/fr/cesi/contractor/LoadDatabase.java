@@ -98,6 +98,7 @@ public class LoadDatabase {
                     "en cours",
                     false,
                     1,
+                    new Date(),
                     new Date()
             );
             log.info("Preloading " + projectRepository.save(p1));
@@ -111,6 +112,7 @@ public class LoadDatabase {
                     "terminé",
                     false,
                     1,
+                    new Date(),
                     new Date()
             );
             log.info("Preloading " + projectRepository.save(p2));
@@ -124,6 +126,7 @@ public class LoadDatabase {
                     "terminé",
                     false,
                     1,
+                    new Date(),
                     new Date()
             );
             log.info("Preloading " + projectRepository.save(p3));
