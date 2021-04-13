@@ -29,7 +29,7 @@ public class LoadDatabase {
                     new Date(),
                     false,
                     1,
-                    null,
+                    customerRepository.getOne(3),
                     null
             )));
             log.info("Preloading " + quoteRepository.save(new Quote(
@@ -41,7 +41,7 @@ public class LoadDatabase {
                     new Date(),
                     false,
                     1,
-                    null,
+                    customerRepository.getOne(2),
                     null
             )));
             log.info("Preloading " + customerRepository.save(new Customer(
