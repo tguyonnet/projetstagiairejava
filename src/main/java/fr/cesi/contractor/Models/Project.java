@@ -64,6 +64,14 @@ public class Project {
         this.customer = customer;
     }
 
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -104,13 +112,6 @@ public class Project {
         this.state = state;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
 
     public Integer get_v() {
         return _v;
