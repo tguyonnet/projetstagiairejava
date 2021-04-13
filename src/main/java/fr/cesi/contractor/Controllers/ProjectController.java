@@ -23,7 +23,7 @@ public class ProjectController {
     }
 
     @GetMapping("show/{id}")
-    public Optional<Project> getProjectById(@PathVariable(value = "id") Long id) {
+    public Optional<Project> getProjectById(@PathVariable(value = "id") Integer id) {
         return projectRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class ProjectController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable(value = "id") Long id, @Validated @RequestBody Project changeProject) throws ResourceNotFoundException
+    public ResponseEntity<Project> updateProject(@PathVariable(value = "id") Integer id, @Validated @RequestBody Project changeProject) throws ResourceNotFoundException
     {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Quote " + id + " not found"));
@@ -52,7 +52,7 @@ public class ProjectController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProject(@PathVariable Long id) {
+    public String deleteProject(@PathVariable Integer id) {
         projectRepository.deleteById(id);
         return "Projet "+ id + " supprimé ";
     }
