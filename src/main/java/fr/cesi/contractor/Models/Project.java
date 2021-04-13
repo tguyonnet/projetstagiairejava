@@ -27,8 +27,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(Integer _id, String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite, String state, Boolean isDeleted, Integer _v, Date created_at) {
-        this._id = _id;
+    public Project(String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite, String state, Boolean isDeleted, Integer _v, Date created_at) {
         this.name = name;
         this.customer = customer;
         this.address = address;
