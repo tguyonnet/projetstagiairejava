@@ -13,7 +13,7 @@ public class Project {
     private Integer _id;
     private String name;
     @ManyToOne
-    private Customer customer_id;
+    private Customer customer;
     private String address;
     private Integer postCode;
     private String city;
@@ -39,12 +39,12 @@ public class Project {
         this.name = name;
     }
 
-    public Customer getCustomer_id() {
-        return customer_id;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomer_id(Customer customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getAddress() {
