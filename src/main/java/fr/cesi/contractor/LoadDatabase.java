@@ -1,8 +1,10 @@
 package fr.cesi.contractor;
 
 import fr.cesi.contractor.Models.Customer;
+import fr.cesi.contractor.Models.Project;
 import fr.cesi.contractor.Models.Quote;
 import fr.cesi.contractor.Repository.CustomerRepository;
+import fr.cesi.contractor.Repository.ProjectRepository;
 import fr.cesi.contractor.Repository.QuoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository) {
+    CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository, ProjectRepository projectRepository) {
 
         return args -> {
             log.info("Preloading " + quoteRepository.save(new Quote(
@@ -90,6 +92,43 @@ public class LoadDatabase {
                     false,
                     "1",
                     new Date(),
+                    new Date()
+            )));
+
+            log.info("Preloading " + projectRepository.save(new Project(
+                    "Projet 1",
+                    null,
+                    "rue test",
+                    44444,
+                    "NANTES",
+                    new Date(),
+                    "en cours",
+                    false,
+                    1,
+                    new Date()
+            )));
+            log.info("Preloading " + projectRepository.save(new Project(
+                    "Projet 2",
+                    null,
+                    "rue test 2",
+                    66666,
+                    "SATAN",
+                    new Date(),
+                    "terminé",
+                    false,
+                    1,
+                    new Date()
+            )));
+            log.info("Preloading " + projectRepository.save(new Project(
+                    "Projet 3",
+                    null,
+                    "rue test 3",
+                    99999,
+                    "EROSLAND",
+                    new Date(),
+                    "terminé",
+                    false,
+                    1,
                     new Date()
             )));
         };

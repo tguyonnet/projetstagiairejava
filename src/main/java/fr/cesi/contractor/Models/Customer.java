@@ -37,6 +37,10 @@ public class Customer {
         this.updated_at = updated_at;
     }
 
+    public Customer() {
+
+    }
+
     public Date getCreated_at() {
         return created_at;
     }
