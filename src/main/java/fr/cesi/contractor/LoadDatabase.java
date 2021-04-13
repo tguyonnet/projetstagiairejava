@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.Date;
 
 @Configuration
@@ -22,30 +21,7 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository, ProjectRepository projectRepository) {
 
         return args -> {
-            log.info("Preloading " + quoteRepository.save(new Quote(
-                    "Devis 1",
-                    "En Attente",
-                    150000,
-                    182000,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
-                    customerRepository.getOne(3),
-                    null
-            )));
-            log.info("Preloading " + quoteRepository.save(new Quote(
-                    "Devis 2",
-                    "En Attente",
-                    17206,
-                    19954,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
-                    customerRepository.getOne(2),
-                    null
-            )));
+
             log.info("Preloading " + customerRepository.save(new Customer(
                     "Client 1",
                     "ienCli",
@@ -97,7 +73,7 @@ public class LoadDatabase {
 
             log.info("Preloading " + projectRepository.save(new Project(
                     "Projet 1",
-                    null,
+                    customerRepository.getOne(1),
                     "rue test",
                     44444,
                     "NANTES",
@@ -107,9 +83,10 @@ public class LoadDatabase {
                     1,
                     new Date()
             )));
+
             log.info("Preloading " + projectRepository.save(new Project(
                     "Projet 2",
-                    null,
+                    customerRepository.getOne(2),
                     "rue test 2",
                     66666,
                     "SATAN",
@@ -121,7 +98,7 @@ public class LoadDatabase {
             )));
             log.info("Preloading " + projectRepository.save(new Project(
                     "Projet 3",
-                    null,
+                    customerRepository.getOne(3),
                     "rue test 3",
                     99999,
                     "EROSLAND",
@@ -131,7 +108,31 @@ public class LoadDatabase {
                     1,
                     new Date()
             )));
+
+            log.info("Preloading " + quoteRepository.save(new Quote(
+                    "Devis 1",
+                    "En Attente",
+                    150000,
+                    182000,
+                    new Date(),
+                    new Date(),
+                    false,
+                    1,
+                    customerRepository.getOne(3),
+                    projectRepository.getOne(1)
+            )));
+            log.info("Preloading " + quoteRepository.save(new Quote(
+                    "Devis 2",
+                    "En Attente",
+                    17206,
+                    19954,
+                    new Date(),
+                    new Date(),
+                    false,
+                    1,
+                    customerRepository.getOne(2),
+                    projectRepository.getOne(2)
+            )));
         };
     }
-
 }
