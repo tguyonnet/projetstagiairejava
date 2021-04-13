@@ -90,7 +90,7 @@ public class LoadDatabase {
             //--> Project
             Project p1 = new Project(
                     "Projet 1",
-                    null,
+                    c1,
                     "rue test",
                     44444,
                     "NANTES",
@@ -104,7 +104,7 @@ public class LoadDatabase {
             log.info("Preloading " + projectRepository.save(p1));
             Project p2 = new Project(
                     "Projet 2",
-                    null,
+                    c2,
                     "rue test 2",
                     66666,
                     "SATAN",
@@ -118,7 +118,7 @@ public class LoadDatabase {
             log.info("Preloading " + projectRepository.save(p2));
             Project p3 = new Project(
                     "Projet 3",
-                    null,
+                    c3,
                     "rue test 3",
                     99999,
                     "EROSLAND",
