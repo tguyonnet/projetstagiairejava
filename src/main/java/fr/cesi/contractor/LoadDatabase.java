@@ -21,117 +21,120 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository, ProjectRepository projectRepository) {
 
-        return args -> {
-            log.info("Preloading " + quoteRepository.save(new Quote(
-                    "Devis 1",
-                    "En Attente",
-                    150000,
-                    182000,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
-                    customerRepository.getOne(3),
-                    null
-            )));
-            log.info("Preloading " + quoteRepository.save(new Quote(
-                    "Devis 2",
-                    "En Attente",
-                    17206,
-                    19954,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
-                    customerRepository.getOne(2),
-                    null
-            )));
-            log.info("Preloading " + customerRepository.save(new Customer(
-                    "Client 1",
-                    "ienCli",
-                    "toto@email.fr",
-                    "0123456789",
-                    "Mr",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
-            )));
-            log.info("Preloading " + customerRepository.save(new Customer(
-                    "Eren",
-                    "Jager",
-                    "lachouette@eldien.fr",
-                    "0123456789",
-                    "Mr",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
-            )));
-            log.info("Preloading " + customerRepository.save(new Customer(
-                    "Ackerman",
-                    "Mikassa",
-                    "Mikassa@Ackerman.fr",
-                    "0123456789",
-                    "Mme",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
-            )));
-            log.info("Preloading " + customerRepository.save(new Customer(
-                    "Ackerman",
-                    "Livai",
-                    "Livai@Ackerman.fr",
-                    "0123456789",
-                    "Non-Binaire",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
-            )));
+        //--> Customer
+        Customer c1 = new Customer(
+                "Client 1",
+                "ienCli",
+                "toto@email.fr",
+                "0123456789",
+                "Mr",
+                "Customer",
+                false,
+                "1",
+                new Date(),
+                new Date()
+        );
+        Customer c2 = new Customer(
+                "Eren",
+                "Jager",
+                "lachouette@eldien.fr",
+                "0123456789",
+                "Mr",
+                "Customer",
+                false,
+                "1",
+                new Date(),
+                new Date()
+        );
+        Customer c3 = new Customer(
+                "Ackerman",
+                "Mikassa",
+                "Mikassa@Ackerman.fr",
+                "0123456789",
+                "Mme",
+                "Customer",
+                false,
+                "1",
+                new Date(),
+                new Date()
+        );
+        Customer c4 = new Customer(
+                "Ackerman",
+                "Livai",
+                "Livai@Ackerman.fr",
+                "0123456789",
+                "Non-Binaire",
+                "Customer",
+                false,
+                "1",
+                new Date(),
+                new Date()
+        );
+        //--> Project
+        Project p1 = new Project(
+                "Projet 1",
+                null,
+                "rue test",
+                44444,
+                "NANTES",
+                new Date(),
+                "en cours",
+                false,
+                1,
+                new Date()
+        );
+        Project p2 = new Project(
+                "Projet 2",
+                null,
+                "rue test 2",
+                66666,
+                "SATAN",
+                new Date(),
+                "terminé",
+                false,
+                1,
+                new Date()
+        );
+        Project p3 = new Project(
+                "Projet 3",
+                null,
+                "rue test 3",
+                99999,
+                "EROSLAND",
+                new Date(),
+                "terminé",
+                false,
+                1,
+                new Date()
+        );
+        //--> Quote
+        Quote q1 = new Quote(
+                "Devis 1",
+                "En Attente",
+                150000,
+                182000,
+                new Date(),
+                new Date(),
+                false,
+                1,
+                c1,
+                p1
+        );
+        Quote q2 = new Quote(
+                "Devis 2",
+                "En Attente",
+                17206,
+                19954,
+                new Date(),
+                new Date(),
+                false,
+                1,
+                c2,
+                p2
+        );
 
-            log.info("Preloading " + projectRepository.save(new Project(
-                    "Projet 1",
-                    null,
-                    "rue test",
-                    44444,
-                    "NANTES",
-                    new Date(),
-                    "en cours",
-                    false,
-                    1,
-                    new Date()
-            )));
-            log.info("Preloading " + projectRepository.save(new Project(
-                    "Projet 2",
-                    null,
-                    "rue test 2",
-                    66666,
-                    "SATAN",
-                    new Date(),
-                    "terminé",
-                    false,
-                    1,
-                    new Date()
-            )));
-            log.info("Preloading " + projectRepository.save(new Project(
-                    "Projet 3",
-                    null,
-                    "rue test 3",
-                    99999,
-                    "EROSLAND",
-                    new Date(),
-                    "terminé",
-                    false,
-                    1,
-                    new Date()
-            )));
+        return args -> {
+            //log.info("Preloading " + projectRepository.save());
         };
     }
-
 }

@@ -36,7 +36,7 @@ public class QuoteController {
      * @throws ResourceNotFoundException
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Quote> getQuoteById(@PathVariable(value = "id") Long quoteId) throws ResourceNotFoundException
+    public ResponseEntity<Quote> getQuoteById(@PathVariable(value = "id") Integer quoteId) throws ResourceNotFoundException
     {
         Quote quote = quoteRepository.findById(quoteId)
             .orElseThrow(() -> new ResourceNotFoundException("Quote " + quoteId + " not found"));
@@ -65,7 +65,7 @@ public class QuoteController {
      * @throws ResourceNotFoundException
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Quote> updateQuote(@PathVariable(value = "id") Long quoteId, @Validated @RequestBody Quote quoteDetail) throws ResourceNotFoundException
+    public ResponseEntity<Quote> updateQuote(@PathVariable(value = "id") Integer quoteId, @Validated @RequestBody Quote quoteDetail) throws ResourceNotFoundException
     {
         Quote quote = quoteRepository.findById(quoteId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quote " + quoteId + " not found"));
@@ -91,7 +91,7 @@ public class QuoteController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteQuote(@PathVariable(value = "id") Long quoteId)
+    public ResponseEntity<String> deleteQuote(@PathVariable(value = "id") Integer quoteId)
     {
         Quote quote = quoteRepository.findById(quoteId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quote " + quoteId + " not found"));
