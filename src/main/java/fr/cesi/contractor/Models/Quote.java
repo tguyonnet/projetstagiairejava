@@ -27,6 +27,21 @@ public class Quote {
     @ManyToOne
     private Project project;
 
+    public Quote() { }
+
+    public Quote(String object, String state, float totalCost, float totalPrice, Date created_at, Date updated_at, boolean isDeleted, int _v, Customer customer, Project project) {
+        this.object = object;
+        this.state = state;
+        this.totalCost = totalCost;
+        this.totalPrice = totalPrice;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.isDeleted = isDeleted;
+        this._v = _v;
+        this.customer = customer;
+        this.project = project;
+    }
+
     public int get_id() {
         return _id;
     }
