@@ -4,15 +4,12 @@ import fr.cesi.contractor.Models.Quote;
 import fr.cesi.contractor.Repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/quote")
@@ -87,6 +84,12 @@ public class QuoteController {
         return ResponseEntity.ok(updatedQuote);
     }
 
+    /**
+     * Delete the selected quote
+     *
+     * @param quoteId
+     * @return
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteQuote(@PathVariable(value = "id") Long quoteId)
     {
