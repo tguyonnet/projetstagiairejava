@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api")
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
@@ -35,7 +35,7 @@ public class CustomerController {
      * @param customer
      * @return
      */
-    @PostMapping("/customer")
+    @PostMapping("/customer/create/")
     public Customer createCustomer(@Validated @RequestBody Customer customer)
     {
         return customerRepository.save(customer);
@@ -49,7 +49,7 @@ public class CustomerController {
      * @return
      * @throws ResourceNotFoundException
      */
-    @PutMapping("/update/{id}")
+    @PutMapping("/customer/update/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") Integer customerId, @Validated @RequestBody Customer customerDetail) throws ResourceNotFoundException
     {
         Customer customer = customerRepository.findById(customerId)
