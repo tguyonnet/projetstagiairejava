@@ -17,7 +17,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository custermeRepository) {
+    CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository) {
 
         return args -> {
             log.info("Preloading " + quoteRepository.save(new Quote(
@@ -44,12 +44,48 @@ public class LoadDatabase {
                     null,
                     null
             )));
-            log.info("Preloading " + custermeRepository.save(new Customer(
+            log.info("Preloading " + customerRepository.save(new Customer(
                     "Client 1",
                     "ienCli",
                     "toto@email.fr",
                     "0123456789",
                     "Mr",
+                    "Customer",
+                    false,
+                    "1",
+                    new Date(),
+                    new Date()
+            )));
+            log.info("Preloading " + customerRepository.save(new Customer(
+                    "Eren",
+                    "Jager",
+                    "lachouette@eldien.fr",
+                    "0123456789",
+                    "Mr",
+                    "Customer",
+                    false,
+                    "1",
+                    new Date(),
+                    new Date()
+            )));
+            log.info("Preloading " + customerRepository.save(new Customer(
+                    "Ackerman",
+                    "Mikassa",
+                    "Mikassa@Ackerman.fr",
+                    "0123456789",
+                    "Mme",
+                    "Customer",
+                    false,
+                    "1",
+                    new Date(),
+                    new Date()
+            )));
+            log.info("Preloading " + customerRepository.save(new Customer(
+                    "Ackerman",
+                    "Livai",
+                    "Livai@Ackerman.fr",
+                    "0123456789",
+                    "Non-Binaire",
                     "Customer",
                     false,
                     "1",
