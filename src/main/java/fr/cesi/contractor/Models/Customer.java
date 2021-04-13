@@ -15,13 +15,27 @@ public class Customer {
     private String nom;
     private String firstName;
     private String email;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String sexe;
     private String typeCustomer;
     private Boolean isDeleted;
     private String _v;
     private Date created_at;
     private Date updated_at;
+
+
+    public Customer(String nom, String firstName, String email, String phoneNumber, String sexe, String typeCustomer, Boolean isDeleted, String _v, Date created_at, Date updated_at) {
+        this.nom = nom;
+        this.firstName = firstName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.sexe = sexe;
+        this.typeCustomer = typeCustomer;
+        this.isDeleted = isDeleted;
+        this._v = _v;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
 
     public Date getCreated_at() {
         return created_at;
@@ -47,7 +61,7 @@ public class Customer {
         return email;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -83,7 +97,7 @@ public class Customer {
         this.email = email;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
