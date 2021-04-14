@@ -1,8 +1,11 @@
 package fr.cesi.contractor.Controllers;
 
+import fr.cesi.contractor.LoadDatabase;
 import fr.cesi.contractor.Models.Customer;
 import fr.cesi.contractor.Models.Quote;
 import fr.cesi.contractor.Repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +16,11 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api")
 public class CustomerController {
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
+
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -38,6 +44,8 @@ public class CustomerController {
     @PostMapping("/customer/create/")
     public Customer createCustomer(@Validated @RequestBody Customer customer)
     {
+        customer.setCreated_at(new Date());
+        customer.setUpdated_at(new Date());
         return customerRepository.save(customer);
     }
 
@@ -53,7 +61,7 @@ public class CustomerController {
     public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") Integer customerId, @Validated @RequestBody Customer customerDetail) throws ResourceNotFoundException
     {
         Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Quote " + customerId + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer " + customerId + " not found"));
 
         if (customerDetail.get_v() != null) {
             customer.set_v(customerDetail.get_v());
@@ -89,7 +97,7 @@ public class CustomerController {
         if (customerDetail.getDeleted() != null) {
             customer.setDeleted(customerDetail.getDeleted());
         }
-
+        log.error("LOG ERROR "+customer.toString());
         final Customer updatedCustomer = customerRepository.save(customer);
         return ResponseEntity.ok(updatedCustomer);
     }
