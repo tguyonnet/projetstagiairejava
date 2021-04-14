@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/item")
+@RequestMapping("/api")
 public class ItemController {
     @Autowired
     private ItemRepository itemsRepository;
@@ -19,7 +19,7 @@ public class ItemController {
      *
      * @return the list
      */
-    @GetMapping("/index")
+    @GetMapping("/items")
     public List<Item> getAllItems(){return itemsRepository.findAll();}
 
 }

@@ -1,9 +1,11 @@
 package fr.cesi.contractor;
 
 import fr.cesi.contractor.Models.Customer;
+import fr.cesi.contractor.Models.Item;
 import fr.cesi.contractor.Models.Project;
 import fr.cesi.contractor.Models.Quote;
 import fr.cesi.contractor.Repository.CustomerRepository;
+import fr.cesi.contractor.Repository.ItemRepository;
 import fr.cesi.contractor.Repository.ProjectRepository;
 import fr.cesi.contractor.Repository.QuoteRepository;
 import org.slf4j.Logger;
@@ -18,7 +20,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository, ProjectRepository projectRepository) {
+    CommandLineRunner initDatabase(QuoteRepository quoteRepository, CustomerRepository customerRepository, ProjectRepository projectRepository, ItemRepository itemRepository) {
 
         return args -> {
             //--> Customer
@@ -157,6 +159,31 @@ public class LoadDatabase {
                     p2
             );
             log.info("Preloading " + quoteRepository.save(q2));
+            // -> Item
+            Item i1 = new Item(
+                    "Article Démo",
+                    60,
+                    "Usage unique",
+                    50.6f,
+                    45.5f
+            );
+            log.info("Preloading "+itemRepository.save(i1));
+            Item i2 = new Item(
+                    "Article Démo",
+                    80,
+                    "Echantillon",
+                    50.8f,
+                    44.5f
+            );
+            log.info("Preloading "+itemRepository.save(i2));
+            Item i3 = new Item(
+                    "Article Démo",
+                    60,
+                    "Usage demo",
+                    52.6f,
+                    43.5f
+            );
+            log.info("Preloading "+itemRepository.save(i3));
         };
     }
 }
