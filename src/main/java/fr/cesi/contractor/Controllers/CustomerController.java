@@ -55,9 +55,40 @@ public class CustomerController {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quote " + customerId + " not found"));
 
-        customer.set_v(customerDetail.get_v());
-        customer.setCreated_at(customerDetail.getCreated_at());
-        customer.setUpdated_at(new Date());
+        if (customerDetail.get_v() != null) {
+            customer.set_v(customerDetail.get_v());
+        }
+
+        if (customerDetail.getNom() != null) {
+            customer.setNom(customerDetail.getNom());
+        }
+        if (customerDetail.getFirstName() != null) {
+            customer.setFirstName(customerDetail.getFirstName());
+        }
+        if (customerDetail.getEmail() != null) {
+            customer.setEmail(customerDetail.getEmail());
+        }
+        if (customerDetail.getPhoneNumber() != null) {
+            customer.setPhoneNumber(customerDetail.getPhoneNumber());
+        }
+        if (customerDetail.getSexe() != null) {
+            customer.setSexe(customerDetail.getSexe());
+        }
+        if (customerDetail.getAddress() != null) {
+            customer.setAddress(customerDetail.getAddress());
+        }
+        if (customerDetail.getPostCode() != null) {
+            customer.setPostCode(customerDetail.getPostCode());
+        }
+        if (customerDetail.getCity() != null) {
+            customer.setCity(customerDetail.getCity());
+        }
+        if (customerDetail.getTypeCustomer() != null) {
+            customer.setTypeCustomer(customerDetail.getTypeCustomer());
+        }
+        if (customerDetail.getDeleted() != null) {
+            customer.setDeleted(customerDetail.getDeleted());
+        }
 
         final Customer updatedCustomer = customerRepository.save(customer);
         return ResponseEntity.ok(updatedCustomer);
