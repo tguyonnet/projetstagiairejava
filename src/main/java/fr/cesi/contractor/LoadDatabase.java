@@ -159,6 +159,19 @@ public class LoadDatabase {
                     p2
             );
             log.info("Preloading " + quoteRepository.save(q2));
+            Quote q3 = new Quote(
+                    "Devis 2",
+                    "En Attente",
+                    17206,
+                    19954,
+                    new Date(),
+                    new Date(),
+                    false,
+                    1,
+                    c2,
+                    p2
+            );
+            log.info("Preloading " + quoteRepository.save(q3));
             // -> Item
             Item i1 = new Item(
                     "Article Démo",
