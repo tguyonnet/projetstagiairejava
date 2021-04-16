@@ -69,8 +69,13 @@ public class ProjectController {
     }
 
     @DeleteMapping("/project/delete/{id}")
-    public String deleteProject(@PathVariable Integer id) {
-        projectRepository.deleteById(id);
-        return "Projet "+ id + " supprimé ";
+    public ResponseEntity<String> deleteProject(@PathVariable Integer id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project " + id + " not found"));
+
+        project.setIsDeleted(true);
+
+        projectRepository.save(project);
+        return ResponseEntity.ok("Project successfully deleted");
     }
 }
