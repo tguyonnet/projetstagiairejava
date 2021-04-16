@@ -33,11 +33,7 @@ public class LoadDatabase {
                     "TotoAdrresse",
                     79200,
                     "totoVille",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
+                    "Customer"
             );
             log.info("Preloading " + customerRepository.save(c1));
 
@@ -50,11 +46,7 @@ public class LoadDatabase {
                     "TotoAdrresse",
                     79200,
                     "totoVille",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
+                    "Customer"
             );
             log.info("Preloading " + customerRepository.save(c2));
             Customer c3 = new Customer(
@@ -66,11 +58,7 @@ public class LoadDatabase {
                     "TotoAdrresse",
                     79200,
                     "totoVille",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
+                    "Customer"
             );
             log.info("Preloading " + customerRepository.save(c3));
             Customer c4 = new Customer(
@@ -82,11 +70,7 @@ public class LoadDatabase {
                     "TotoAdrresse",
                     79200,
                     "totoVille",
-                    "Customer",
-                    false,
-                    "1",
-                    new Date(),
-                    new Date()
+                    "Customer"
             );
             log.info("Preloading " + customerRepository.save(c4));
             //--> Project
@@ -96,10 +80,6 @@ public class LoadDatabase {
                     "rue test",
                     44444,
                     "NANTES",
-                    new Date(),
-                    "en cours",
-                    1,
-                    new Date(),
                     new Date()
             );
             log.info("Preloading " + projectRepository.save(p1));
@@ -109,10 +89,6 @@ public class LoadDatabase {
                     "rue test 2",
                     66666,
                     "SATAN",
-                    new Date(),
-                    "terminé",
-                    1,
-                    new Date(),
                     new Date()
             );
             log.info("Preloading " + projectRepository.save(p2));
@@ -122,49 +98,30 @@ public class LoadDatabase {
                     "rue test 3",
                     99999,
                     "EROSLAND",
-                    new Date(),
-                    "terminé",
-                    1,
-                    new Date(),
                     new Date()
             );
             log.info("Preloading " + projectRepository.save(p3));
             //--> Quote
             Quote q1 = new Quote(
                     "Devis 1",
-                    "En Attente",
                     150000,
                     182000,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
                     c1,
                     p1
             );
             log.info("Preloading " + quoteRepository.save(q1));
             Quote q2 = new Quote(
                     "Devis 2",
-                    "En Attente",
                     17206,
                     19954,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
                     c2,
                     p2
             );
             log.info("Preloading " + quoteRepository.save(q2));
             Quote q3 = new Quote(
                     "Devis 2",
-                    "En Attente",
                     17206,
                     19954,
-                    new Date(),
-                    new Date(),
-                    false,
-                    1,
                     c2,
                     p2
             );

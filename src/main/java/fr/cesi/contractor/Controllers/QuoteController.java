@@ -73,7 +73,7 @@ public class QuoteController {
         Quote quote = quoteRepository.findById(quoteId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quote " + quoteId + " not found"));
 
-        if (quoteDetail.get_v() != 0) {
+        if (quoteDetail.get_v() != 1) {
             quote.set_v(quoteDetail.get_v());
         }
         if (quoteDetail.getCustomer() != null) {
@@ -94,7 +94,7 @@ public class QuoteController {
         if (quoteDetail.getTotalPrice() != 0) {
             quote.setTotalPrice(quoteDetail.getTotalPrice());
         }
-        quote.setUpdated_at(new Date());
+        quote.setUpdated_at();
 
         final Quote updatedQuote = quoteRepository.save(quote);
         return ResponseEntity.ok(updatedQuote);

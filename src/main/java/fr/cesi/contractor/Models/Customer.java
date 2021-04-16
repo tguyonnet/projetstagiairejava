@@ -22,11 +22,11 @@ public class Customer {
     private String city;
     private String typeCustomer;
     private Boolean isDeleted;
-    private String _v;
+    private int _v;
     private Date created_at;
     private Date updated_at;
 
-    public Customer(String nom, String firstName, String email, String phoneNumber, String sexe, String address, Integer postCode, String city, String typeCustomer, Boolean isDeleted, String _v, Date created_at, Date updated_at) {
+    public Customer(String nom, String firstName, String email, String phoneNumber, String sexe, String address, Integer postCode, String city, String typeCustomer) {
         this.nom = nom;
         this.firstName = firstName;
         this.email = email;
@@ -36,17 +36,19 @@ public class Customer {
         this.postCode = postCode;
         this.city = city;
         this.typeCustomer = typeCustomer;
-        this.isDeleted = isDeleted;
-        this._v = _v;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.init();
     }
-
 
     public Customer() {
-
+        this.init();
     }
 
+    private void init() {
+        this.setDeleted(false);
+        this.set_v(1);
+        this.setCreated_at();
+        this.setUpdated_at();
+    }
 
     public int get_id() {
         return _id;
@@ -118,7 +120,7 @@ public class Customer {
         return isDeleted;
     }
 
-    public String get_v() {
+    public int get_v() {
         return _v;
     }
 
@@ -151,15 +153,15 @@ public class Customer {
         isDeleted = deleted;
     }
 
-    public void set_v(String _v) {
+    public void set_v(int _v) {
         this._v = _v;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated_at() {
+        this.created_at = new Date();
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdated_at() {
+        this.updated_at = new Date();
     }
 }

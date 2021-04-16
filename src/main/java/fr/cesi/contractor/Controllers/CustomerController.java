@@ -50,7 +50,6 @@ public class CustomerController {
     @PostMapping("/customer/create/")
     public Customer createCustomer(@Validated @RequestBody Customer customer)
     {
-        customer.setCreated_at(new Date());
         return customerRepository.save(customer);
     }
 
@@ -68,10 +67,9 @@ public class CustomerController {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer " + customerId + " not found"));
 
-        if (customerDetail.get_v() != null) {
+        if (customerDetail.get_v() != 1) {
             customer.set_v(customerDetail.get_v());
         }
-
         if (customerDetail.getNom() != null) {
             customer.setNom(customerDetail.getNom());
         }
@@ -99,10 +97,8 @@ public class CustomerController {
         if (customerDetail.getTypeCustomer() != null) {
             customer.setTypeCustomer(customerDetail.getTypeCustomer());
         }
-        if (customerDetail.getDeleted() != null) {
-            customer.setDeleted(customerDetail.getDeleted());
-        }
-        log.error("LOG ERROR "+customer.toString());
+        customer.setUpdated_at(new Date());
+
         final Customer updatedCustomer = customerRepository.save(customer);
         return ResponseEntity.ok(updatedCustomer);
     }
@@ -121,8 +117,9 @@ public class CustomerController {
                 .orElseThrow(() -> new ResourceNotFoundException("Customer " + customerID + " not found"));
 
         customer.setDeleted(true);
+
+        //Quand on supprime le client, il faut supprimer tous ces projets et tous ces devis
         List<Project> projects = projectRepository.findAllByCustomer(customer);
-        log.error("LOG N'est pas error "+projects.toString());
         for (Project project: projects) {
             List<Quote> quotes = quoteRepository.findAllByProject(project);
             project.safeDeleted(quotes);
@@ -130,9 +127,8 @@ public class CustomerController {
                 quoteRepository.save(quote);
             }
             projectRepository.save(project);
-            log.error("LOG N'est pas error "+project.toString());
         }
-        //customerRepository.save(customer);
+        customerRepository.save(customer);
         return ResponseEntity.ok("Customer successfully deleted");
     }
 }

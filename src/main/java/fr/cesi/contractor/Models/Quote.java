@@ -27,20 +27,27 @@ public class Quote {
     @ManyToOne
     private Project project;
 
-    public Quote() { }
+    public Quote() {
+        this.init();
+    }
 
-    public Quote(String object, String state, float totalCost, float totalPrice, Date created_at, Date updated_at, boolean isDeleted, int _v, Customer customer, Project project) {
+    public Quote(String object, float totalCost, float totalPrice, Customer customer, Project project) {
         this.object = object;
-        this.state = state;
         this.totalCost = totalCost;
         this.totalPrice = totalPrice;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.isDeleted = isDeleted;
-        this._v = _v;
         this.customer = customer;
         this.project = project;
+        this.init();
     }
+
+    private void init() {
+        this.setState("En attente");
+        this.setCreated_at();
+        this.setUpdated_at();
+        this.setDeleted(false);
+        this.set_v(1);
+    }
+
 
     public int get_id() {
         return _id;
@@ -86,16 +93,16 @@ public class Quote {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated_at() {
+        this.created_at = new Date();
     }
 
     public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdated_at() {
+        this.updated_at = new Date();
     }
 
     public boolean isDeleted() {

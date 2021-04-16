@@ -19,9 +19,7 @@ public class Item {
     private float cost;
     private float price;
 
-
     public Item() {
-
     }
 
     public Item(String designation, int quantity, String usageUnit, float cost, float price) {

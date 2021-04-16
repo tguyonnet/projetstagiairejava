@@ -27,20 +27,26 @@ public class Project {
     private Date updated_at;
 
     public Project() {
+        this.init();
     }
 
-    public Project(String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite, String state, Integer _v, Date created_at, Date updated_at) {
+    public Project(String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite) {
         this.name = name;
         this.customer = customer;
         this.address = address;
         this.postCode = postCode;
         this.city = city;
         this.dateBeginSite = dateBeginSite;
-        this.state = state;
+        this.init();
+    }
+
+    public void init()
+    {
+        this.setState("En cours");
         this.setIsDeleted(false);
-        this._v = _v;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.set_v(1);
+        this.setCreated_at();
+        this.setUpdated_at();
     }
 
     public Integer get_id() {
@@ -74,6 +80,7 @@ public class Project {
     private void setIsDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
+
     public void safeDeleted(List<Quote> quotes){
         for (Quote quote: quotes) {
             quote.setDeleted(true);
@@ -133,15 +140,15 @@ public class Project {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated_at() {
+        this.created_at = new Date();
     }
 
     public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdated_at() {
+        this.updated_at = new Date();
     }
 }
