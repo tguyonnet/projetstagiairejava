@@ -43,8 +43,6 @@ public class ProjectController {
 
     @PostMapping("/project/create")
     public Project createProject(@Validated @RequestBody Project project) {
-        log.error("" + project);
-        //Customer customer = customerRepository.findById(project);
         return projectRepository.save(project);
     }
 
