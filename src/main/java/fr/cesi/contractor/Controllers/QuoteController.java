@@ -28,7 +28,7 @@ public class QuoteController {
     @GetMapping("/quotes")
     public List<Quote> getAllQuotes()
     {
-        return quoteRepository.findAll();
+        return quoteRepository.findByIsDeletedEquals(false);
     }
 
     /**

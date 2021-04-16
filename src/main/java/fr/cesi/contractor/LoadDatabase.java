@@ -98,7 +98,6 @@ public class LoadDatabase {
                     "NANTES",
                     new Date(),
                     "en cours",
-                    false,
                     1,
                     new Date(),
                     new Date()
@@ -112,7 +111,6 @@ public class LoadDatabase {
                     "SATAN",
                     new Date(),
                     "terminé",
-                    false,
                     1,
                     new Date(),
                     new Date()
@@ -126,7 +124,6 @@ public class LoadDatabase {
                     "EROSLAND",
                     new Date(),
                     "terminé",
-                    false,
                     1,
                     new Date(),
                     new Date()

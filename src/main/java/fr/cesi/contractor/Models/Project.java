@@ -4,6 +4,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,7 +29,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite, String state, Boolean isDeleted, Integer _v, Date created_at, Date updated_at) {
+    public Project(String name, Customer customer, String address, Integer postCode, String city, Date dateBeginSite, String state, Integer _v, Date created_at, Date updated_at) {
         this.name = name;
         this.customer = customer;
         this.address = address;
@@ -36,7 +37,7 @@ public class Project {
         this.city = city;
         this.dateBeginSite = dateBeginSite;
         this.state = state;
-        this.isDeleted = isDeleted;
+        this.setIsDeleted(false);
         this._v = _v;
         this.created_at = created_at;
         this.updated_at = updated_at;
@@ -70,10 +71,15 @@ public class Project {
         return isDeleted;
     }
 
-    public void setIsDeleted(Boolean deleted) {
+    private void setIsDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
-
+    public void safeDeleted(List<Quote> quotes){
+        for (Quote quote: quotes) {
+            quote.setDeleted(true);
+        }
+        this.setIsDeleted(true);
+    }
     public String getAddress() {
         return address;
     }

@@ -22,7 +22,7 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public List<Project> allProjects() {
-      return projectRepository.findAll();
+      return projectRepository.findByIsDeletedEquals(false);
     }
 
     @GetMapping("/project/show/{id}")
@@ -33,7 +33,6 @@ public class ProjectController {
     @PostMapping("/project/create")
     public Project createProject(@Validated @RequestBody Project project) {
         project.setState("en cours");
-        project.setIsDeleted(false);
         project.set_v(1);
         project.setUpdated_at(new Date());
         return projectRepository.save(project);
@@ -63,9 +62,6 @@ public class ProjectController {
         if(changeProject.getState() !=null) {
             project.setState(changeProject.getState());
         }
-        if(changeProject.getIsDeleted() !=null) {
-            project.setIsDeleted(changeProject.getIsDeleted());
-        }
         project.setUpdated_at(new Date());
 
         final Project updateProject = projectRepository.save(project);
@@ -76,8 +72,6 @@ public class ProjectController {
     public ResponseEntity<String> deleteProject(@PathVariable Integer id) {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Project " + id + " not found"));
-
-        project.setIsDeleted(true);
 
         projectRepository.save(project);
         return ResponseEntity.ok("Project successfully deleted");

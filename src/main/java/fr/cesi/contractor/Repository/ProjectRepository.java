@@ -1,5 +1,6 @@
 package fr.cesi.contractor.Repository;
 
+import fr.cesi.contractor.Models.Customer;
 import fr.cesi.contractor.Models.Project;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +13,6 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
     //List<Project> findAllBy_id(@Param("_id") Integer _id);
+    public List<Project> findAllByCustomer(Customer customer);
+    public List<Project> findByIsDeletedEquals(boolean b);
 }

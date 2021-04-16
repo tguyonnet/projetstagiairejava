@@ -2,8 +2,11 @@ package fr.cesi.contractor.Controllers;
 
 import fr.cesi.contractor.LoadDatabase;
 import fr.cesi.contractor.Models.Customer;
+import fr.cesi.contractor.Models.Project;
 import fr.cesi.contractor.Models.Quote;
 import fr.cesi.contractor.Repository.CustomerRepository;
+import fr.cesi.contractor.Repository.ProjectRepository;
+import fr.cesi.contractor.Repository.QuoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,10 @@ public class CustomerController {
 
     @Autowired
     private CustomerRepository customerRepository;
-
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private QuoteRepository quoteRepository;
     /**
      * List of customer
      *
@@ -32,7 +38,7 @@ public class CustomerController {
     @GetMapping("/customers")
     public List<Customer> getAllCustomers()
     {
-        return customerRepository.findAll();
+        return customerRepository.findByIsDeletedEquals(false); //.findAll();
     }
 
     /**
@@ -45,7 +51,6 @@ public class CustomerController {
     public Customer createCustomer(@Validated @RequestBody Customer customer)
     {
         customer.setCreated_at(new Date());
-        customer.setUpdated_at(new Date());
         return customerRepository.save(customer);
     }
 
@@ -109,15 +114,25 @@ public class CustomerController {
      * @param customerID
      * @return
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/customer/delete/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable(value = "id") Integer customerID)
     {
         Customer customer = customerRepository.findById(customerID)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer " + customerID + " not found"));
 
         customer.setDeleted(true);
-
-        customerRepository.save(customer);
+        List<Project> projects = projectRepository.findAllByCustomer(customer);
+        log.error("LOG N'est pas error "+projects.toString());
+        for (Project project: projects) {
+            List<Quote> quotes = quoteRepository.findAllByProject(project);
+            project.safeDeleted(quotes);
+            for (Quote quote:quotes) {
+                quoteRepository.save(quote);
+            }
+            projectRepository.save(project);
+            log.error("LOG N'est pas error "+project.toString());
+        }
+        //customerRepository.save(customer);
         return ResponseEntity.ok("Customer successfully deleted");
     }
 }
