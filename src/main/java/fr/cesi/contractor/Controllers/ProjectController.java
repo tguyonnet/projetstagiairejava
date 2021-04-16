@@ -32,6 +32,10 @@ public class ProjectController {
 
     @PostMapping("/project/create")
     public Project createProject(@Validated @RequestBody Project project) {
+        project.setState("en cours");
+        project.setIsDeleted(false);
+        project.set_v(1);
+        project.setUpdated_at(new Date());
         return projectRepository.save(project);
     }
 
